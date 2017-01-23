@@ -1,0 +1,2 @@
+# wumpshop
+(Imported from ClubWumpusTeam)
