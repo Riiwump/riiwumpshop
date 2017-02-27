@@ -1,3 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="The Wump Shop Channel: Stocking the best Wumpus memes since 2016.">
+    <meta name="author" content="Wump Shop Channel">
+    <meta property="og:title" name="Title" content="Wump Shop Channel"/>
+    <meta property="og:description" name="Description"
+          content="The Wump Shop Channel: Stocking the best Wumpus memes since 2016."/>
+    <meta property="og:image" name="Image" content="https://i.imgur.com/QtflJti.png"/>
+    <meta property="og:url" name="URL" content="https://clubwumpus.github.io/wumpshop/"/>
+	<title>Wump Shop Channel</title>
+
+	<link type="text/css" href="styles.css" rel="stylesheet" />
+	
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="alertify/alertify.js"></script>
+	<link rel="stylesheet" href="alertify/css/alertify.css"></script>
+	<link rel="stylesheet" href="alertify/css/themes/default.css"></script>
+</head>
+<div id="loader"><img draggable=false id="loading-bag" src="./img/bag.png">
+<img draggable=false id="loading-icon" src="./img/loading.png">
+<audio
+  src="./bgm/loading.mp3" loop=1 id="loading" auto>
+</audio>
+</div>
+
+<div style="display:none;" id="mainstuff">
 <style>
 #loading-icon {
     display: block;
@@ -28,41 +57,27 @@ function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myDiv").style.display = "block";
 }
-</script>
-<body onload="setClocks()" style="margin:0;">
 
-<div id="loader"><img draggable=false id="loading-bag" src="./img/bag.png">
-<img draggable=false id="loading-icon" src="./img/loading.png">
-<audio
-  src="./bgm/loading.mp3" loop=1 id="loading" auto>
-</audio>
-</div>
+function polyAudio(path, copies) {
+  var elems = [], index = 0
+  for (var i = 0; i < 16; i++) elems.push(new Audio(path))
+  return {
+    play: function() {
+      if (window.chrome) elems[index].load()
+      elems[index].play()
+      index = (index + 1) % copies
+    }
+  }
+}
 
-<div style="display:none;" id="mainstuff">
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml">
-<head>
-	<link rel="icon" href="./favicon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <meta name="description" content="The Wump Shop Channel: Stocking the best Wumpus memes since 2016.">
-    <meta name="author" content="Wump Shop Channel">
-    <meta property="og:title" name="Title" content="Wump Shop Channel"/>
-    <meta property="og:description" name="Description"
-          content="The Wump Shop Channel: Stocking the best Wumpus memes since 2016."/>
-    <meta property="og:image" name="Image" content="https://i.imgur.com/LDhx4Lr.png"/>
-    <meta property="og:url" name="URL" content="https://clubwumpusteam.github.io/wumpshop/"/>
-	<title>Wump Shop Channel</title>
-
-	<link type="text/css" href="styles.css" rel="stylesheet" />
+function audioFade() {
+    var backgroundAudio=document.getElementById("bgm");
+	backgroundAudio.volume = 0;
+	$(backgroundAudio).animate({volume: 0.4}, 2000);
+	backgroundAudio.setAttribute("oncanplay", "#");
+}
 	
-	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="alertify/alertify.js"></script>
-	<link rel="stylesheet" href="alertify/css/alertify.css"></script>
-	<link rel="stylesheet" href="alertify/css/themes/default.css"></script>
-	
-	<script type="text/javascript">
-	
-var snd = new Audio("bgm/select.mp3");
+var snd = polyAudio("bgm/select.mp3", 10);
 		$(document).ready(function() {		
 			$('.menu a').hover(function() {			    
 				$(this).stop().animate({							
@@ -109,27 +124,32 @@ var snd = new Audio("bgm/select.mp3");
 		alertify.alert("<iframe src='./catalog-virtual.html' width='99%' height='99%'></iframe>").maximize();;
 		snd.play();
 		}
+		function catalogChannel() {
+		alertify.alert("<iframe src='./catalog-channel.html' width='99%' height='99%'></iframe>").maximize();;
+		snd.play();
+		}
 	</script>
-</head>
 
-<body>
+<body onload="setClocks()" style="margin:0;">
+
+
 
 <div style="text-align:center;margin-top:20px;">
 
 <div class="menu">
 	<a class="yellow" href="#" onclick="return notMadeYet();"> </a>
 	<a class="pink" href="#" onclick="return catalogVirtual();">Virtual Wumpus</a>
-	<a class="purple" href="#" onclick="return notMadeYet();">Wump Channels</a>
+	<a class="purple" href="#" onclick="return catalogChannel();">Wump Channels</a>
 	<a class="blue" href="#" onclick="return cacheMoney();">Add Wump Points</a>
 	<a class="orange" href="#" onclick="return optionDisplay();">Wump Settings</a>
-	<a class="green" href="https://clubwumpusteam.github.io/web">Exit to Site</a>
+	<a class="green" href="https://clubwumpus.github.io/wumpmenu/">Exit to Menu</a>
 	</div>
 	<div class="bar">
-		<a class="black" href="#" onclick="return newsDisplay();"><marquee scrollamount=10>Welcome to the Wump Shop Channel!</marquee></a>
+		<a class="black" href="#" onclick="return newsDisplay();"><marquee scrollamount=10>Update 3/1/2017: New Channels!</marquee></a>
 		</div>
 		<p class="infotext">© 20XX Wumpus Entertainment Studios.  No Rights Reserved.</p>
 <audio
-  src="./bgm/menu.mp3" loop=1 id="bgm" auto>
+  src="./bgm/menu.mp3" loop=1 id="bgm" auto onplay="audioFade()">
 </audio>
 </body>
 </html>
@@ -147,6 +167,7 @@ function showPage() {
 	document.getElementById('loading').pause()
   document.getElementById("loader").style.display = "none";
   document.getElementById("mainstuff").style.display = "block";
+  document.getElementById('bgm').volume= 0.5;
 document.getElementById('bgm').play()
 }
 
